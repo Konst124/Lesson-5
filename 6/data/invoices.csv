@@ -1,0 +1,4 @@
+invoice_id,date,customer,customer_email,description,quantity,unit_price,total
+INV-2026-001,05.10.2026,ООО «Ромашка»,info@romashka.ru,Разработка корпоративного сайта,1,180000,180000
+INV-2026-002,12.10.2026,ИП Смирнов А.В.,smirnov@example.com,"Технические консультации, час",12,5000,60000
+INV-2026-003,20.10.2026,АО «ТехноПром»,sales@technoprom.ru,Лицензия на ПО (12 месяцев),3,25000,75000

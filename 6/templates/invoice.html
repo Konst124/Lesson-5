@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Счёт ${invoice_id}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 18mm 16mm 24mm 16mm;
+            @bottom-center {
+                content: "Счёт № ${invoice_id} · страница " counter(page) " из " counter(pages);
+                font-family: "DejaVu Sans", "Roboto", "Arial", sans-serif;
+                font-size: 8.5pt;
+                color: #999;
+            }
+        }
+
+        body {
+            font-family: "DejaVu Sans", "Roboto", "Arial", "Helvetica", sans-serif;
+            font-size: 11pt;
+            color: #222;
+            line-height: 1.45;
+        }
+
+        h1 {
+            font-size: 24pt;
+            letter-spacing: 6px;
+            margin: 0 0 2mm 0;
+            color: #1f3b57;
+        }
+
+        .muted { color: #777; font-size: 9.5pt; }
+        .right { text-align: right; }
+        .doc-title { font-size: 13pt; color: #1f3b57; }
+
+        table.doc-head {
+            width: 100%;
+            border-bottom: 3px solid #1f3b57;
+            padding-bottom: 6mm;
+            margin-bottom: 8mm;
+            border-collapse: collapse;
+        }
+        table.doc-head td { vertical-align: top; }
+
+        .logo {
+            width: 40mm;
+            height: 14mm;
+            border: 2px solid #1f3b57;
+            text-align: center;
+            line-height: 14mm;
+            color: #1f3b57;
+            font-weight: bold;
+            font-size: 10pt;
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        table.info {
+            width: 100%;
+            margin: 0 0 6mm 0;
+            border-collapse: collapse;
+        }
+        table.info td { padding: 1.5mm 0; vertical-align: top; }
+        table.info td.label { width: 45mm; color: #777; }
+
+        table.items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 4mm;
+        }
+        table.items th {
+            background: #1f3b57;
+            color: #ffffff;
+            padding: 3mm;
+            text-align: left;
+            font-size: 10pt;
+        }
+        table.items td {
+            padding: 3mm;
+            border-bottom: 1px solid #d8dee5;
+        }
+
+        th.num, td.num { text-align: right; white-space: nowrap; }
+
+        table.totals {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 3mm;
+        }
+        table.totals td { padding: 2.5mm 3mm; }
+        td.total-label {
+            text-align: right;
+            font-size: 12pt;
+            border-top: 2px solid #1f3b57;
+        }
+        td.total-value {
+            text-align: right;
+            font-size: 13pt;
+            font-weight: bold;
+            color: #1f3b57;
+            border-top: 2px solid #1f3b57;
+            white-space: nowrap;
+        }
+
+        .note { margin-top: 10mm; color: #555; font-size: 10pt; }
+
+        table.sign {
+            width: 70%;
+            margin-top: 20mm;
+            border-collapse: collapse;
+        }
+        table.sign td.sign-line { border-bottom: 1px solid #333; width: 55mm; }
+        table.sign td.sign-caption { color: #777; font-size: 9pt; padding-top: 1.5mm; }
+    </style>
+</head>
+<body>
+    <table class="doc-head">
+        <tr>
+            <td>
+                <h1>СЧЁТ</h1>
+                <div class="doc-title">№ ${invoice_id} от ${date}</div>
+            </td>
+            <td class="right">
+                <div class="logo">ЛОГОТИП</div>
+                <div class="muted">
+                    Исполнитель: ООО «Моя компания»<br>
+                    ИНН 7700123456 · info@example.ru
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="info">
+        <tr>
+            <td class="label">Получатель:</td>
+            <td><b>${customer}</b></td>
+        </tr>
+        <tr>
+            <td class="label">E-mail:</td>
+            <td>${customer_email}</td>
+        </tr>
+        <tr>
+            <td class="label">Основание:</td>
+            <td>Счёт № ${invoice_id} от ${date}</td>
+        </tr>
+    </table>
+
+    <table class="items">
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th class="num">Кол-во</th>
+                <th class="num">Цена, руб.</th>
+                <th class="num">Сумма, руб.</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${items_rows}
+        </tbody>
+    </table>
+
+    <table class="totals">
+        <tr>
+            <td></td>
+            <td class="total-label">Итого:</td>
+            <td class="total-value">${total} руб.</td>
+        </tr>
+    </table>
+
+    <p class="note">
+        Спасибо за сотрудничество! Оплату прошу произвести в течение 5 банковских дней.
+    </p>
+
+    <table class="sign">
+        <tr>
+            <td></td>
+            <td class="sign-line"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="sign-caption">Подпись исполнителя</td>
+        </tr>
+    </table>
+</body>
+</html>
